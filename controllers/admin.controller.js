@@ -24,6 +24,7 @@ const adminController = {
     }
   },
   createLoginSession: (req, res) => {
+    // req body objs - req.body.email, req.body.key
     try {
       pool.query(
         "SELECT * FROM users WHERE user_email = $1",

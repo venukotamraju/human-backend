@@ -22,7 +22,26 @@ const postController = {
             console.log("error from fetching post by id: ", err);
           }
           if (result.rows[0]) {
-            res.json({ message: "OK", data: result.rows[0] });
+            return res.json({ message: "OK", data: result.rows[0] });
+          }
+          res.status(404).json({ message: "not found" });
+        }
+      );
+    } catch (error) {
+      res.json({ message: error.msg });
+    }
+  },
+  getByName: (req, res) => {
+    try {
+      pool.query(
+        "SELECT * FROM post WHERE post_title = $1",
+        [req.params.post_title],
+        (err, result) => {
+          if (err) {
+            console.log("error from fetching post by title: ", err);
+          }
+          if (result.rows[0]) {
+            return res.json({ message: "OK", data: result.rows[0] });
           }
           res.status(404).json({ message: "not found" });
         }
@@ -34,8 +53,14 @@ const postController = {
   create: (req, res) => {
     try {
       pool.query(
-        "INSERT INTO post (post_image_link,post_content,post_domain) VALUES ($1,$2,$3) RETURNING *",
-        [req.body.image, req.body.content, req.body.domain],
+        "INSERT INTO post (post_title,post_image_link,post_content,post_domain,post_date) VALUES ($1,$2,$3,$4,$5) RETURNING *",
+        [
+          req.body.title,
+          req.body.image,
+          req.body.content,
+          req.body.domain,
+          req.body.date,
+        ],
         (err, result) => {
           if (err) {
             console.log("error posting to the database: ", err);
