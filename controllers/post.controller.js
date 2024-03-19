@@ -9,7 +9,7 @@ const postController = {
         res.json({ message: "OK", data: result["rows"] });
       });
     } catch (error) {
-      res.json({ message: error.msg });
+      res.json({ message: error });
     }
   },
   getById: (req, res) => {

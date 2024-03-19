@@ -80,7 +80,7 @@ const adminController = {
       if (err) {
         console.log("error from destroying session: ", err);
       }
-      res.clearCookie("connect.sid", { path: "/" });
+      res.clearCookie("myExpressApp", { path: "/" });
       res.json({
         message: "OK",
       });

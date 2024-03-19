@@ -36,7 +36,10 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    name: "myExpressApp",
     cookie: {
+      sameSite: "none",
+      httpOnly: false,
       maxAge: 100 * 60 * 60 * 24,
     },
   })
