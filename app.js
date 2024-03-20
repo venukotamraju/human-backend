@@ -29,6 +29,7 @@ app.use(
   })
 );
 
+app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(
   session({
@@ -40,8 +41,8 @@ app.use(
     cookie: {
       sameSite: "none",
       httpOnly: false,
-      maxAge: 100 * 60 * 60 * 24,
-      secure: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      secure: "auto",
     },
   })
 );
