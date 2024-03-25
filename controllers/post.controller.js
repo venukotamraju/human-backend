@@ -97,10 +97,9 @@ const postController = {
           if (err) {
             console.log("error from deleting post: ", err);
           }
-          if (result.rows[0]) {
+          if (result) {
             res.json({ message: "OK" });
           }
-          res.status(404).json({ message: "not found" });
         }
       );
     } catch (error) {
